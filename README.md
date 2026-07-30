@@ -1,0 +1,105 @@
+# Pay Next
+
+一个简单的收款码展示页。
+
+>[!CAUTION]
+> **请勿以任何形式贩卖此项目。**
+
+## 🚀 前情提要
+
+微信不再允许长按扫描个人收款码。因此，重构本项目，实现二码（子母）模式，可将支付宝和微信收款码同时呈现
+
+摄像头扫描时支付软件会自动选择适合自身的收款码，但从相册扫描时不行。
+
+微信开通商家码后，可直接跳转页面，因此本项目也支持 UA 识别功能。
+
+这是我第一个真正意义上的 React (Next.js) 项目。结构混乱，缺陷较多，还请谅解。
+
+## ✨ 特性
+
+更臃肿的体积换来了更强大的功能。
+
+- 字母码，用户可自定义子母比例
+- 用户可随意编辑页面，包括头像和背景
+- 一键导出 `.env` 文件，二维码一键下载
+- 也支持传统模式，识别 UA 展示相应二维码/跳转页面
+- 支持 ICP 展示
+
+## 🛠️ 开始
+
+### 部署
+
+#### 通过 Vercel 一键部署
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Falex3236%2Fpay&demo-title=Pay%20Site&demo-description=A%20simple%20payment%20code%20landing%20page.&demo-url=https%3A%2F%2Fpay.alex3236.top%2F)
+
+#### 本地开发
+
+```bash
+$ pnpm install
+$ pnpm run dev
+```
+
+### 配置
+
+1. 进入设置，调整相关选项
+2. 进入编辑模式，编辑页面内容（图片只有右键编辑 URL 方可保存）
+3. 下载配置文件（`saved.env`），导入为环境变量
+4. 修改环境变量后，可能需要重新部署（Redeploy）
+
+### UA 识别功能
+
+可在 `已部署站点 - 设置 - 前往更多设置` 中快速生成
+
+手动配置：按照以下格式填写 `app_platforms` 环境变量
+
+```json5
+{
+    "baidu": {
+        "match": "MyClient/[0-9\.]+", // 匹配 User-Agent（正则）
+        "redirect": "https://myclient.example.org/" // 直接跳转
+    },
+    "unipay": {
+        "match": "Unipay",
+        "url": "https://unipay.example.org/", // 显示二维码，可长按识别
+        "tip": "长按识别二维码" // 下方提示
+    }
+}
+```
+
+### 显示 ICP 备案
+
+可在 `已部署站点 - 设置 - 前往更多设置` 中快速生成
+
+手动配置：按照以下格式编辑 `app_contents` 环境变量
+
+```json
+"icp": {
+    "code": "闽ICP备00000000号",
+    "url": "https://example.org/"
+}
+```
+
+### 支付宝扫码白屏
+
+尝试使用 Cloudflare 代理域名
+
+---
+
+```plain
+Pay: 一个简单的收款码展示页
+
+版权所有 © 2024 Alex3236
+
+本程序是自由软件: 您可以根据自由软件基金会发布的
+GNU 通用公共许可证第三版，或是您选择的任何更高版
+本中的条款，重新发布和/或修改本程序。
+
+本程序发布的目的是希望它能够发挥作用，但不提供任
+何保证；甚至不包括适销性或特定用途适用性的隐含保
+证。有关详细信息，请参阅 GNU 通用公共许可证。
+
+您应该已经随本程序一起收到了 GNU 通用公共许可证
+的副本。如果没有，请参阅
+<https://www.gnu.org/licenses/>。
+```
